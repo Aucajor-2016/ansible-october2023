@@ -1,0 +1,27 @@
+- hosts: all
+  become: yes   #to ssh as ec2-user so add sudo in front of the command 
+  tasks:
+  - hostname:
+     name: "{{ inventory_hostname }}"
+  - debug:
+     msg: "{{ ansible_distribution }}"
+  - name: install Apache
+    include_tasks: "{{ ansible_distribution }}.yml"
+   
+
+# - hosts: worker
+#   tasks:
+#   - hostname:
+#      name: elima
+
+# - hosts: worker2
+#   become: yes
+#   tasks:
+#   - hostname:
+#      name: aws1
+
+# - hosts: worker3
+#   become: yes
+#   tasks:
+#   - hostname:
+#      name: aws2
